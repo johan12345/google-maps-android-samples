@@ -17,6 +17,7 @@
 package com.example.kotlindemos
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -50,6 +51,9 @@ class BasicMapDemoActivity : AppCompatActivity(), OnMapReadyCallback {
         with(googleMap) {
             moveCamera(CameraUpdateFactory.newLatLngZoom(SYDNEY, ZOOM_LEVEL))
             addMarker(MarkerOptions().position(SYDNEY))
+            setOnCameraMoveListener {
+                Log.d("BasicMapDemoActivity", "bounds: ${projection.visibleRegion.latLngBounds}, center: ${projection.visibleRegion.latLngBounds.center}, camera: ${cameraPosition.target}, zoom: ${cameraPosition.zoom}")
+            }
         }
     }
 }
